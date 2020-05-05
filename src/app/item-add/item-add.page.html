@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>New item</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="gobackHome()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <img>
+
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <ion-item>
+          <ion-label position="floating">Title</ion-label>
+          <ion-input type="text" [(ngModel)]="txttitle"></ion-input>
+        </ion-item>
+
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <ion-item>
+          <ion-label position="floating">Description</ion-label>
+          <ion-textarea type="text" [(ngModel)]="txtdesc"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" color="primary" (click)="newItem()">Add Item</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

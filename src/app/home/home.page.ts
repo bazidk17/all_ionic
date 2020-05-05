@@ -19,13 +19,16 @@ export class HomePage {
     public route: Router,
   ) { }
 
+  gotoLogin(){
+    this.route.navigate(["/login"]);
+  }
 
   async register() {
     const { txtname, txtpassword, txtphone, txtemail } = this
     try {
       const res = await this.afAuth.createUserWithEmailAndPassword(txtemail, txtpassword);
       console.log("regsitered");
-      this.route.navigate(["/login"]);
+      this.gotoLogin();
 
     }
     catch (err) {

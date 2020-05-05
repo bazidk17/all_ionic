@@ -1,10 +1,23 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Home</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="gotoAdd()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <h2><ion-title>Welcome {{name}}</ion-title></h2>
-  <ion-button fill="solid" expand="block" color="danger" (click)="logout()">Logout</ion-button>
+  <h2>
+    <ion-title>Welcome {{name}}</ion-title>
+  </h2>
+
 </ion-content>
+
+<ion-footer style="background-color: white;">
+
+  <ion-button expand="block" color="danger" (click)="logout()">Logout</ion-button>
+
+</ion-footer>

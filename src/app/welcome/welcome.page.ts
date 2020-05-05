@@ -16,9 +16,13 @@ export class WelcomePage implements OnInit {
   ngOnInit() {
     if (this.afAuth.currentUser) {
       this.name=this.afAuth.user;
+      console.log(this.name);
     }
   }
+  gotoAdd(){
+    this.route.navigate(["/item-add"]);
 
+  }
   logout(){
     if (this.afAuth.currentUser) {
       this.afAuth.signOut()

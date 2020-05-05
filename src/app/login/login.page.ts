@@ -20,6 +20,9 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
   }
+  gotoRegister(){
+    this.route.navigate(["/home"]);
+  }
 
   async login() {
     const { txtEmail, txtPassword } = this
@@ -27,8 +30,6 @@ export class LoginPage implements OnInit {
       const res = await this.afAuth.signInWithEmailAndPassword(txtEmail,txtPassword)
       console.log("successful login");
       this.route.navigate(["/welcome"]);
-
-
     }
     catch(err){
       console.dir(err)
@@ -37,5 +38,4 @@ export class LoginPage implements OnInit {
       }
     }
   }
-
 }
