@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { FirebaseAuthService } from '../firebase-auth.service';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class WelcomePage implements OnInit {
 
-  constructor(public afAuth: AngularFireAuth, public route: Router) { }
+  constructor(public authObj: FirebaseAuthService, public route: Router, public afAuth: AngularFireAuth) { }
 
   name:any;
   ngOnInit() {
@@ -24,16 +25,6 @@ export class WelcomePage implements OnInit {
 
   }
   logout(){
-    if (this.afAuth.currentUser) {
-      this.afAuth.signOut()
-        .then(() => {
-          console.log("LOG Out");
-          this.route.navigate(["/login"]);
-
-        }).catch((error) => {
-          console.log(error);
-          
-        });
-    }
+    this.authObj.logout();
   }
 }

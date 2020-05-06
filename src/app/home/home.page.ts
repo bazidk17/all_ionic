@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+
 import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
-
+import { FirebaseAuthService } from '../firebase-auth.service';
 
 @Component({
   selector: 'app-home',
@@ -15,24 +15,15 @@ export class HomePage {
   txtphone;
   txtemail;
 
-  constructor(public afAuth: AngularFireAuth,
+  constructor(public authObj: FirebaseAuthService,
     public route: Router,
   ) { }
 
-  gotoLogin(){
+  gotoLogin() {
     this.route.navigate(["/login"]);
   }
 
-  async register() {
-    const { txtname, txtpassword, txtphone, txtemail } = this
-    try {
-      const res = await this.afAuth.createUserWithEmailAndPassword(txtemail, txtpassword);
-      console.log("regsitered");
-      this.gotoLogin();
-
-    }
-    catch (err) {
-      console.dir(err);
-    }
+  register() {
+    this.authObj.register(this.txtemail,this.txtpassword);
   }
 }
