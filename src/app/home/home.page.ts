@@ -24,6 +24,6 @@ export class HomePage {
   }
 
   register() {
-    this.authObj.register(this.txtemail,this.txtpassword);
+    this.authObj.register(this.txtemail,this.txtpassword,this.txtname,this.txtphone);
   }
 }

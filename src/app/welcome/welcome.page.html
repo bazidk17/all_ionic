@@ -11,8 +11,17 @@
 
 <ion-content>
   <h2>
-    <ion-title>Welcome {{name}}</ion-title>
+    <ion-title>Welcome </ion-title>
   </h2>
+
+  <ion-card *ngFor="let one_data of data">
+    <ion-card-header>
+      <ion-card-title>{{one_data.payload.doc.id}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{one_data.payload.doc.description}}
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
 

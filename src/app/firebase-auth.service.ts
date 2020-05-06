@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { AngularFirestore } from '@angular/fire/firestore';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseAuthService {
 
-  constructor(public afAuth: AngularFireAuth, public route: Router, public toastController: ToastController) { }
+  constructor(public afAuth: AngularFireAuth, public route: Router, public toastController: ToastController, private afs: AngularFirestore, ) { }
+  user:any;
 
   async showToast(msg) {
     const toast = await this.toastController.create({
@@ -18,11 +22,19 @@ export class FirebaseAuthService {
     toast.present();
   }
 
-  async register(email, password) {
+  async register(email, password,name,phone) {
     try {
       const res = await this.afAuth.createUserWithEmailAndPassword(email, password);
       console.log("regsitered");
+      this.afAuth.signInWithEmailAndPassword(email, password)
+      let value = {
+        name: name,
+        phone: phone,
+      }
       this.showToast('Account has been created!');
+      this.afs.collection("users").doc(email).set(value);
+      this.afAuth.signOut()
+
       this.route.navigate(["/login"]);
     }
     catch (err) {
@@ -31,9 +43,20 @@ export class FirebaseAuthService {
   }
 
   async login(email, password) {
+    
     try {
       const res = await this.afAuth.signInWithEmailAndPassword(email, password)
       console.log("successful login");
+      this.afs.collection("users").doc(email).snapshotChanges().subscribe(result=>{
+        this.user=result;
+        console.log(this.user);
+      });;
+
+      // const navigationExtras: NavigationExtras = {
+      //   state: {
+      //     email: email,
+      //   }
+      // };
       this.showToast('Welcome, Have a nice day!');
       this.route.navigate(["/welcome"]);
     }

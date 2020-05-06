@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseAuthService } from '../firebase-auth.service';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
+// import { AngularFireAuth } from '@angular/fire/auth';
+import { FirebaseOperationService } from '../firebase-operation.service';
+
 
 
 @Component({
@@ -11,20 +13,27 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class WelcomePage implements OnInit {
 
-  constructor(public authObj: FirebaseAuthService, public route: Router, public afAuth: AngularFireAuth) { }
+  constructor(public authObj: FirebaseAuthService, public router: Router, public operObj: FirebaseOperationService) { }
 
-  name:any;
+  data:any;
+
   ngOnInit() {
-    if (this.afAuth.currentUser) {
-      this.name=this.afAuth.user;
-      console.log(this.name);
-    }
-  }
-  gotoAdd(){
-    this.route.navigate(["/item-add"]);
+    this.operObj.get_all_items("qwe@gmail.com").snapshotChanges().subscribe(result => {
+
+      this.data = result;
+      result.forEach(one_data => {
+        // console.log(one_data.payload.doc.id);
+        console.log(one_data.payload.doc);
+      })
+      // console.log(tasks);
+    });
 
   }
-  logout(){
+  gotoAdd() {
+    this.router.navigate(["/item-add"]);
+
+  }
+  logout() {
     this.authObj.logout();
   }
 }
