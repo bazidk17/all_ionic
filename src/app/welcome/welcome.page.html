@@ -15,11 +15,11 @@
   </h2>
 
   <ion-card *ngFor="let one_data of data">
-    <ion-card-header>
-      <ion-card-title>{{one_data.payload.doc.id}}</ion-card-title>
+    <ion-card-header (click)="displayOne()">
+      <ion-card-title>{{one_data.payload.doc.get('title')}}</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
-      {{one_data.payload.doc.description}}
+    <ion-card-content [routerLink]="['/item-add/', one_data.payload.doc.id]">
+      {{one_data.payload.doc.get('description')}}
     </ion-card-content>
   </ion-card>
 

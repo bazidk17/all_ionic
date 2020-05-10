@@ -34,9 +34,15 @@
         </ion-item>
       </ion-col>
     </ion-row>
+   
     <ion-row>
-      <ion-col>
+      <ion-col *ngIf="edit==true">
         <ion-button expand="block" color="primary" (click)="newItem()">Add Item</ion-button>
+      </ion-col>
+      <ion-col *ngIf="edit==false">
+        <ion-button expand="block" color="primary" (click)="updateItem()">Update</ion-button>
+        <ion-button expand="block" color="danger" (click)="deleteItem()">Delete</ion-button>
+
       </ion-col>
     </ion-row>
   </ion-grid>

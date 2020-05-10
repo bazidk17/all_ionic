@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'item-add',
     loadChildren: () => import('./item-add/item-add.module').then( m => m.ItemAddPageModule)
   },
+  {
+    path: 'item-add/:id',
+    loadChildren: () => import('./item-add/item-add.module').then(m => m.ItemAddPageModule)
+  },
   
 ];
 

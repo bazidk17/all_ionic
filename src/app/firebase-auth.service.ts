@@ -47,16 +47,9 @@ export class FirebaseAuthService {
     try {
       const res = await this.afAuth.signInWithEmailAndPassword(email, password)
       console.log("successful login");
-      this.afs.collection("users").doc(email).snapshotChanges().subscribe(result=>{
-        this.user=result;
-        console.log(this.user);
-      });;
 
-      // const navigationExtras: NavigationExtras = {
-      //   state: {
-      //     email: email,
-      //   }
-      // };
+      localStorage.setItem('currentEmail',email);
+      
       this.showToast('Welcome, Have a nice day!');
       this.route.navigate(["/welcome"]);
     }
@@ -79,6 +72,7 @@ export class FirebaseAuthService {
         }).catch((error) => {
           console.log(error);
         });
+      localStorage.removeItem('currentEmail');
     }
   }
 
