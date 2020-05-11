@@ -10,11 +10,12 @@
 </ion-header>
 
 <ion-content>
-  <h2>
+  <!-- <h2>
     <ion-title>Welcome </ion-title>
-  </h2>
+  </h2> -->
 
   <ion-card *ngFor="let one_data of data">
+    <img [src]="one_data.payload.doc.get('imagePath')" style="height: 200px;width: fit-content;">
     <ion-card-header (click)="displayOne()">
       <ion-card-title>{{one_data.payload.doc.get('title')}}</ion-card-title>
     </ion-card-header>

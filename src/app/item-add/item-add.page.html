@@ -11,16 +11,38 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row>
-      <ion-col text-center>
-        <img>
-
+    <ion-row class="ion-justify-content-center" *ngIf="edit==true">
+      <ion-col class="ion-justify-content-center">
+        <ion-row>
+          <img *ngIf="imgURL" class="card-img-top img-thumbnail" style="height: 15rem" [src]="imgURL">
+          <input #file style="display:none" name="image" id="image" type="file" (change)="preview(file.files)"
+            accept="image/*">
+        </ion-row>
+        <ion-row>
+          <ion-button class="btn-change-picture" (click)="file.click()">Add Picture</ion-button>
+        </ion-row>
       </ion-col>
+
+    </ion-row>
+    <ion-row class="ion-justify-content-center" *ngIf="edit==false" style="flex-direction: column;">
+        <ion-row>
+          <img style="height: 15rem" [src]="imgURL">
+          <input #file style="display:none" name="image" id="image" type="file" (change)="preview(file.files)"
+            accept="image/*">
+        </ion-row>
+        <ion-row>
+          <ion-button class="btn-change-picture" (click)="file.click()">Change Picture</ion-button>
+        </ion-row>
+      
     </ion-row>
     <ion-row>
       <ion-col text-center>
         <ion-item>
-          <ion-label position="floating">Title</ion-label>
+          <ion-label position="floating">Image</ion-label>
+
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Hobby</ion-label>
           <ion-input type="text" [(ngModel)]="txttitle"></ion-input>
         </ion-item>
 
@@ -29,12 +51,12 @@
     <ion-row>
       <ion-col text-center>
         <ion-item>
-          <ion-label position="floating">Description</ion-label>
+          <ion-label position="floating">Address</ion-label>
           <ion-textarea type="text" [(ngModel)]="txtdesc"></ion-textarea>
         </ion-item>
       </ion-col>
     </ion-row>
-   
+
     <ion-row>
       <ion-col *ngIf="edit==true">
         <ion-button expand="block" color="primary" (click)="newItem()">Add Item</ion-button>
